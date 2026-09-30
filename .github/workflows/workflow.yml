@@ -28,7 +28,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - run: echo "${{ env.APP_ENV }}"
+    - run: echo "${{ env.APP_ENV }} - ${{ env.CONFIG_TYPE }} - ${{ env.PYTHON_VERSION }}"
     - run: echo "Job was triggered by event ${{ github.event_name }}"
     - run: echo "This job was executerd on a runner with os ${{ runner.os }}"
     - run: echo "Nmae of the branch ${{ github.ref }} and your repository ${{ github.repository }}"
