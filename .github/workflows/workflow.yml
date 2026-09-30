@@ -3,6 +3,8 @@
 name: CI
 run-name: ${{ github.actor }} is teting
 
+env:
+  APP_ENV: PythonApp
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -20,11 +22,14 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      CONFIG_TYPE: Debug
+      PYTHON_VERSION: 3.8
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - run: echo "${{ env.APP_ENV }}"
     - run: echo "Job was triggered by event ${{ github.event_name }}"
     - run: echo "This job was executerd on a runner with os ${{ runner.os }}"
-    - run: echo"Nmae of the branch ${{ github.ref }} and your repository ${{ github.repository }}"
+    - run: echo "Nmae of the branch ${{ github.ref }} and your repository ${{ github.repository }}"
     - run: echo "this job's status is ${{ job.status }}"
