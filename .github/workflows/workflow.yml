@@ -99,6 +99,9 @@ jobs:
 
     - name: Set Up Helm
       uses: azure/setup-helm@v4.2.0
+    
+    - name: Helm Dependency Update
+      run: helm dependency update ./kube2py/
 
     - name: Lint helm
       run: helm lint ./kube2py/
@@ -114,3 +117,4 @@ jobs:
       with:
         name: helm-package
         path: ./*.tgz
+        
