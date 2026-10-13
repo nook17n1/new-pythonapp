@@ -98,7 +98,7 @@ jobs:
         path: .
 
     - name: Set Up Helm
-      uses: azure/setup-helm@4.2.0
+      uses: azure/setup-helm@v4.2.0
 
     - name: Lint helm
       run: helm lint ./kube2py/
