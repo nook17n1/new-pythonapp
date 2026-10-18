@@ -119,6 +119,7 @@ jobs:
     name: Deploy Helm
     needs: [build-image, heln-ci]
     runs-on: ubuntu-latest
+    environment: development
 
     steps:
     - uses: actions/download-artifact@v4
@@ -128,5 +129,17 @@ jobs:
 
     - name: Set Up Helm
       uses: azure/setup-helm@v4.2.0
+
+    - name: Set Up Kubectl
+      uses: azure/setup-kubectl@v4
+
+    - uses: azure/login@v3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/aks-set-context@v5
+      with:
+        resource-group: ${{ vars.AZURE_RESOURSE_GROUP }}
+        cluster-name: ${{ vars.AZURE_CLUSTER_NAME }}
 
 
