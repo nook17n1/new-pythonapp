@@ -149,7 +149,7 @@ jobs:
 
     - name: Deploy helm to Development
       run:  |
-        helm upgrade --install kube2py --atomic --wait --timeout 3600s --debug ./kube2py-*.tgz \
+        helm upgrade --install kube2py --wait --timeout 300s --debug ./kube2py-*.tgz \
           -f ./kube2py/values.yaml \
           --set mysql.configs.MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}" \
           --set mysql.configs.MYSQL_USER="${{ secrets.MYSQL_USER }}" \
@@ -159,3 +159,13 @@ jobs:
           --set kube2py.secrets.DB_CONNECTION="${{ secrets.DB_CONNECTION }}" \
           --set kube2py.image.version="${{ github.sha }}"
 
+    - name: Debug on failure
+      if: failure()
+      run: |
+        kubectl get pods -A
+        kubectl describe pod -n mateapp -l app.kubernetes.io/name=kube2py
+        kubectl logs -n mateapp deploy/kube2py-kube2py --all-containers --tail=100
+        kubectl logs -n mateapp deploy/kube2py-kube2py --previous --tail=100 || true
+        kubectl get events -n mateapp --sort-by=.lastTimestamp
+        kubectl get pods -n mysql
+        kubectl describe pod -n mysql mysql-0
