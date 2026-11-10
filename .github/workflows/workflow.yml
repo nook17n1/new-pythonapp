@@ -126,7 +126,7 @@ jobs:
 
   deploy-helm-staging:
     name: Deploy helm
-    uses: ./.github\workflows\deployment-workflow.yml
+    uses: ./.github/workflows/deployment-workflow.yml
     needs: deploy-helm-dev
     secrets: inherit
     with:
