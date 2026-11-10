@@ -13,7 +13,7 @@ on:
         type: string
       helm-values-path:
         type: string
-        default: './kube2py/values.yaml
+        default: './kube2py/values.yaml'
       helm-release: 
         default: kube2py
         type: string
