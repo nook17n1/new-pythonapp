@@ -118,8 +118,19 @@ jobs:
   deploy-helm-dev:
     name: Deploy helm
     uses: ./.github\workflows\deployment-workflow.yml
-    needs: [helm-ci, build-image]
+    needs: [heln-ci, build-image]
     secrets: inherit
     with:
       environment: development
       version: ${{ github.sha }}
+
+  deploy-helm-staging:
+    name: Deploy helm
+    uses: ./.github\workflows\deployment-workflow.yml
+    needs: deploy-helm-dev
+    secrets: inherit
+    with:
+      environment: staging
+      version: ${{ github.sha }}
+      helm-values-path: ./kube2py/values/staging.yaml
+      helm-release: kube2py-staging
