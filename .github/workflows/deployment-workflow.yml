@@ -6,7 +6,7 @@ on:
     inputs:
       environment:
         required: true
-        descriptions: 'Environment to deploy to'
+        description: 'Environment to deploy to'
         type: string
       version:
         required: true
