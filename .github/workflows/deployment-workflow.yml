@@ -18,6 +18,9 @@ on:
         default: kube2py
         type: string
 
+env:
+  DOCKER_IMAGE_NAME: kube2py
+
 jobs:
   deploy-helm:
     name: ${{ inputs.environment }}
