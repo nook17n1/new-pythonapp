@@ -4,4 +4,4 @@ configs:
   MYSQL_USER: placeholder
   MYSQL_PASSWORD: placeholder
 
-namespace: kube2py
+namespace: mysql
