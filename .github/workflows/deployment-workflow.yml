@@ -55,7 +55,7 @@ jobs:
 
     - name: Deploy helm to Development
       run:  |
-        helm upgrade --install ${{ inputs.helm-release }} --wait --timeout 300s --debug ./kube2py-*.tgz \
+        helm upgrade --install ${{ inputs.helm-release-name }} --wait --timeout 300s --debug ./kube2py-*.tgz \
           -f ${{ inputs.helm-values-path }} \
           --set mysql.configs.MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}" \
           --set mysql.configs.MYSQL_USER="${{ secrets.MYSQL_USER }}" \
